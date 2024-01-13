@@ -156,3 +156,210 @@ if (isset($_GET['act'])) {
         // Lấy thuộc tính name trong mảng $_FILES['hinh'] trả về
         $hinh = $_FILES['hinh']['name'];
 
+        $target_dir = "./public/image/"; // Thư mục để upload ảnh
+        // Hàm basename(path(Đường dẫn được dùng để kiểm tra), end) dùng để trả về tên tập tin từ một đường dẫn.
+        // Tạo ra file ảnh bằng cách nối thư mục chứa ảnh và tên file ảnh lại với nhau
+        $target_file = $target_dir . basename($_FILES['hinh']['name']);
+
+        // Nếu đăng tải ảnh bằng move_upload_file(đường dẫn(tmp_name), thư mục muốn thêm file ảnh vào) thành công
+        if (move_uploaded_file($_FILES['hinh']['tmp_name'], $target_file)) {
+          $thong_bao = "Đăng tải ảnh thành công";
+        } else {
+          $thong_bao = "Đăng tải ảnh lên thất bại !";
+        }
+
+        // Truy vấn tài khoản theo mã kh
+        $tai_khoan = lay_tai_khoan_theo_ma($ma_kh);
+
+        cap_nhat_tai_khoan($ma_kh, $ho, $ten, $hinh, $email);
+        // Gán vào session đã in thông tin của tài khoản khách hàng
+        $_SESSION['tai_khoan'] = $tai_khoan;
+        $thong_bao = "Cập nhật tài khoản thành công";
+        // header("Location: index.php?act=quan_ly");
+      }
+      include "view/tai_khoan/quan_ly.php";
+      break;
+
+      // Chức năng quên mật khẩu
+    case "quen_mk":
+      if (isset($_POST['btn_submit'])) {
+        $ma_kh = $_POST['ma_kh'];
+        $email = $_POST['email'];
+        $tai_khoan = lay_tai_khoan_theo_ma($ma_kh); // Lấy ra tài khoản theo mã kh(tên đăng nhập) để kiểm tra
+        // Nếu $tai_khoản trả về true (ở đây là đúng tên đăng nhập trong database)
+        if ($tai_khoan) {
+          if ($tai_khoan['email'] != $email) {
+            $thong_bao = "Sai email đăng nhập !";
+          } else {
+            // Nếu tài khoản và email đều đúng thì sẽ gán tài khoản cho biến $_SESSION['tai_khoan_2']
+            // !: Trường hợp ở đây phải tạo $_SESSION['tai_khoan_2'] để lấy dữ liệu tài khoản mà kp là $_SESSION['tai_khoan'] là do trong chức năng đăng nhập đã có $_SESSION['tai_khoan'] nếu giữ nguyên thì khi người dùng chuyển sang phần đổi lại mật khẩu sẽ tự động đăng nhập vào tài khoản của mình
+            // $_SESSION['tai_khoan_2'] = $tai_khoan;
+            header("Location: index.php?act=lay_lai_mk"); // Chuyển hướng sang trang lấy lại mật khẩu
+          }
+        } else {
+          $thong_bao = "Sai tên đăng nhập !";
+        }
+      }
+      include "view/tai_khoan/quen_mat_khau.php";
+      break;
+
+      // Chức năng lấy lại mật khẩu bằng cách đổi mật khẩu mới
+    case "lay_lai_mk":
+      if (isset($_POST['btn_get'])) {
+        // Lấy ma_kh(tên đăng nhập)
+        $ma_kh = $_POST['ma_kh'];
+        $mat_khau2 = $_POST['mat_khau2'];
+        $mat_khau3 = $_POST['mat_khau3'];
+        if ($mat_khau2 != $mat_khau3) {
+          $thong_bao = "Vui lòng xác nhận lại mật khẩu mới !";
+        } else {
+          // Đổi lại(cập nhật mk mới) theo ma_kh vữa lấy ở trên
+          doi_mat_khau_tai_khoan($ma_kh, $mat_khau2);
+          $thong_bao = "Đổi mật khẩu thành công";
+        }
+      }
+      include "view/tai_khoan/lay_mat_khau.php";
+      break;
+
+      // Chức năng đổi mật khẩu riêng theo ma_kh
+    case "doi_mk":
+      if (isset($_POST['btn_change'])) {
+        $ma_kh = $_POST['ma_kh'];
+        $mat_khau = $_POST['mat_khau'];
+        $mat_khau2 = $_POST['mat_khau2']; // Mật khẩu mới
+        $mat_khau3 = $_POST['mat_khau3']; // Xác nhận mật khẩu mới
+        if ($mat_khau2 != $mat_khau3) {
+          $thong_bao = "Vui lòng xác nhận lại mật khẩu mới !";
+        } else {
+          // Lấy tài khoản theo ma_kh
+          $tai_khoan = lay_tai_khoan_theo_ma($ma_kh);
+          // Nếu tài khoản trả về true (ktra ma_kh(tên đăng nhập) đúng)
+          if ($tai_khoan) {
+            // Nếu mật khẩu của tài khoản trong database giống mật khẩu người dùng nhập vào input
+            if ($tai_khoan['mat_khau'] == $mat_khau) {
+              try {
+                // Đổi mật khẩu theo ma_kh, và mật khẩu mới nhập
+                doi_mat_khau_tai_khoan($ma_kh, $mat_khau2);
+                $thong_bao = "Đổi mật khẩu thành công";
+              } catch (Exception $exc) {
+                $thong_bao = "Đổi mật khẩu thất bại !";
+              }
+            } else {
+              $thong_bao = "Mật khẩu cũ không đúng !";
+            }
+          } else {
+            $thong_bao = "Sai tên đăng nhập";
+          }
+        }
+      }
+      include "view/tai_khoan/doi_mat_khau.php";
+      break;
+
+      // Chức năng đăng xuất
+    case "dang_xuat":
+      session_unset(); // session_unset(): Xóa các biến khỏi phiên hiện tại và chúng vẫn còn tồn tại, chỉ phần dữ liệu là bị cắt đi
+      header("Location: index.php");
+      break;
+
+    case "them_vao_gio_hang":
+      if (isset($_POST['btn_insert_cart'])) {
+        $ma_hang_hoa = $_POST['ma_hang_hoa'];
+        $ten_hang_hoa = $_POST['ten_hang_hoa'];
+        $don_gia = (int)$_POST['don_gia'];
+        $hinh = $_POST['hinh'];
+        $so_luong = (int)$_POST['so_luong'];
+        $thanh_tien = $so_luong * $don_gia;
+        // Tạo biến flag cố định bằng 0 để kiểm tra
+        $flag = 0;
+
+        // Khởi tạo biến i = 0;
+        $i = 0;
+        // Chạy vòng lặp foreach biến $_SESSION['gio_hang']
+        foreach ($_SESSION['gio_hang'] as $gh) {
+          // Nếu phần tử thứ 1($ten_hang_hoa) trong mảng $gh trùng với $ten_hang_hoa vừa lấy ở input về
+          if ($gh[1] === $ten_hang_hoa) {
+            // Khởi tạo biến so_luong_moi = số lượng vừa lấy ở input về + phần tử thứ 4 trong mảng $gh(giỏ hàng) số lượng hiện tại trong giỏ hàng
+            $so_luong_moi = $so_luong + $gh[4];
+            // Gán biến $so_luong_moi vào phần tử thứ 4(số_lượng) trong mảng $_SESSION['gio_hang']
+            $_SESSION['gio_hang'][$i][4] = $so_luong_moi;
+            $flag = 1;
+            // break;
+          }
+          // Sau mỗi lần chạy i tăng lên một để gán cho mỗi sản phẩm trong giỏ hàng một biến $i định dạng riêng
+          $i++;
+        }
+
+        if ($flag == 0) {
+          $them_sp_vao_gh = [$ma_hang_hoa, $ten_hang_hoa, $hinh, $don_gia, $so_luong, $thanh_tien];
+          array_push($_SESSION['gio_hang'], $them_sp_vao_gh);
+        }
+      }
+      if (!isset($_SESSION['gio_hang'])) $_SESSION['gio_hang'] = [];
+      header("Location: index.php?act=gio_hang");
+      break;
+
+      // case "cap_nhat_gio_hang":
+      //   if (isset($_POST['btn_cart_update'])) {
+      //     $ma_hang_hoa = $_POST['ma_hang_hoa'];
+      //     $ten_hang_hoa = $_POST['ten_hang_hoa'];
+      //     $don_gia = (int)$_POST['don_gia'];
+      //     $hinh = $_POST['hinh'];
+      //     $so_luong = (int)$_POST['so_luong'];
+      //     $thanh_tien = $so_luong * $don_gia;
+      //     $flag = 0;
+      //     $i = 0;
+      //     foreach ($_SESSION['gio_hang'] as $gh) {
+      //       $_SESSION['gio_hang'][$i][4] = $so_luong;
+      //       $flag = 1;
+      //       $i++;
+      //     }
+      //     if ($flag == 0) {
+      //       $them_sp_vao_gh = [$ma_hang_hoa, $ten_hang_hoa, $hinh, $don_gia, $so_luong, $thanh_tien];
+      //       array_push($_SESSION['gio_hang'], $them_sp_vao_gh);
+      //     }
+      //   }
+      //   if (!isset($_SESSION['gio_hang'])) $_SESSION['gio_hang'] = [];
+      //   include "view/gio_hang/gio_hang.php";
+      //   // header("Location: index.php?act=gio_hang");
+      //   break;
+
+    case "xoa_gio_hang":
+      if (isset($_GET['ma_gio_hang'])) {
+        array_splice($_SESSION['gio_hang'], $_GET['ma_gio_hang'], 1);
+      } else {
+        $_SESSION['gio_hang'] = [];
+      }
+      header("Location: index.php?act=gio_hang");
+      break;
+
+      // Trang giỏ giỏ hàng
+    case "gio_hang":
+      if (!isset($_SESSION['gio_hang'])) $_SESSION['gio_hang'] = [];
+      include "view/gio_hang/gio_hang.php";
+      break;
+
+    case "thanh_toan":
+      include "view/gio_hang/thanh_toan.php";
+      break;
+
+    case "gioi_thieu":
+      include "view/layout/gioi_thieu.php";
+      break;
+
+    case "lien_he":
+      include "view/layout/lien_he.php";
+      break;
+
+    default:
+      $danh_sach_sp_noi_bat = lay_san_pham_noi_bat();
+      $danh_sach_sp_hot = lay_san_pham_dac_biet();
+      include "view/layout/home.php";
+      break;
+  }
+} else {
+  $danh_sach_sp_noi_bat = lay_san_pham_noi_bat();
+  $danh_sach_sp_hot = lay_san_pham_dac_biet();
+  include "view/layout/home.php";
+}
+
+include "view/layout/footer.php";
