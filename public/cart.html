@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>X-Shop</title>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-container">
+          <!-- header-brand -->
+          <div class="header-brand">
+            <h2 class="header-caption">
+              X-SHOP.COM - SINCE 2012 - LUÔN CAM KẾT HÀNG CHÍNH HÃNG
+            </h2>
+
+            <!-- header-user -->
+            <div class="header-user">
+              <i class="fa fa-user header-icon">
+                <!-- header-dropdown -->
+                <div class="header-dropdown-content">
+                  <a href="./admin/signup.html" class="header-dropdown-link"
+                    >Đăng ký</a
+                  >
+                  <a href="./admin/login.html" class="header-dropdown-link"
+                    >Đăng nhập</a
+                  >
+                  <a href="#" class="header-dropdown-link">Giỏ hàng</a>
+                  <a href="#" class="header-dropdown-link">Thanh toán</a>
+                  <a href="#" class="header-dropdown-link">Tra cứu đơn hàng</a>
+                </div>
+              </i>
+              <span class="header-text">Tài khoản</span>
+              <i class="fa-solid fa-chevron-down header-icon"></i>
+            </div>
+          </div>
+
+          <!-- header-controller -->
+          <div class="header-control">
+            <!-- header-logo -->
+            <a href="index.html" class="header-image">
+              <img src="./image/xshop.png" alt="" class="header-img" />
+            </a>
+
+            <!-- header-search-bar -->
+            <form class="header-search">
+              <input
+                type="text"
+                class="header-input"
+                placeholder="Tìm kiếm ..."
+              />
+              <div class="header-search-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+            </form>
+
+            <!-- header-login-cart -->
+            <div class="header-act">
+              <div class="header-act-icon">
+                <a href="./admin/login.html">
+                  <i class="fa fa-user header-user-icon"></i>
+                </a>
+              </div>
+              <div class="header-act-icon">
+                <a href="#">
+                  <i class="fa-solid fa-cart-shopping header-cart-icon"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- header-navigation -->
+          <nav class="header-nav">
+            <ul class="header-menu">
+              <li class="header-item">
+                <a href="./index.html" class="header-link">Trang chủ</a>
+              </li>
+              <li class="header-item">
+                <a href="#" class="header-link">Giới thiệu</a>
+              </li>
+              <li class="header-item">
+                <a href="./products.html" class="header-link">Sản phẩm</a>
+              </li>
+              <li class="header-item">
+                <a href="#" class="header-link">Blog</a>
+              </li>
+              <li class="header-item">
+                <a href="#" class="header-link">Liên hệ</a>
+              </li>
+              <li class="header-item">
+                <a href="#" class="header-link">Sale off</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+      <!-- End-header -->
+
+      <!-- Main-content -->
+      <main class="main">
+        <div class="main-pro-cart">
+          <div class="pro-cart">
+            <h2 class="pro-cart-title">Giỏ hàng</h2>
+            <form action="" class="form-pro-cart" method="post">
+              <table class="form-pro-table">
+                <thead class="form-pro-thead">
+                  <tr>
+                    <th></th>
+                    <th class="form-pro-title">Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Giá tiền</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody class="form-pro-tbody">
+                  <tr>
+                    <td class="form-pro-image">
+                      <img
+                        src="./image/product-01.webp"
+                        alt=""
+                        class="pro-cart-image"
+                      />
+                    </td>
+                    <td class="form-pro-name">
+                      <a href="#" class="form-pro-link">
+                        <span class="pro-cart-name"
+                          >Giày đá bóng Kamito QH19 AS TF - White/Gold</span
+                        >
+                        <span class="pro-cart-color">Trắng</span>
+                      </a>
+                    </td>
+                    <td class="form-pro-quantity">
+                      <input
+                        type="number"
+                        min="1"
+                        step="1"
+                        value="1"
+                        class="pro-cart-input"
+                      />
+                    </td>
+                    <td class="form-pro-price">555,000đ</td>
+                    <td class="form-pro-remove">
+                      <a href="#" class="pro-cart-remove">Xóa</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="form-pro-image">
+                      <img
+                        src="./image/product-01.webp"
+                        alt=""
+                        class="pro-cart-image"
+                      />
+                    </td>
+                    <td class="form-pro-name">
+                      <a href="#" class="form-pro-link">
+                        <span class="pro-cart-name"
+                          >Giày đá bóng Kamito QH19 AS TF - White/Gold</span
+                        >
+                        <span class="pro-cart-color">Trắng</span>
+                      </a>
+                    </td>
+                    <td class="form-pro-quantity">
+                      <input
+                        type="number"
+                        min="1"
+                        step="1"
+                        value="1"
+                        class="pro-cart-input"
+                      />
+                    </td>
+                    <td class="form-pro-price">555,000đ</td>
+                    <td class="form-pro-remove">
+                      <a href="#" class="pro-cart-remove">Xóa</a>
+                    </td>
+                  </tr>
+                  <tr class="form-pro-total">
+                    <td class="form-pro-image"></td>
+                    <td></td>
+                    <td></td>
+                    <td class="pro-cart-price">3,605,000đ</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="form-cart-control">
+                <div class="form-cart-control-left">
+                  <div class="form-cart-note">
+                    <label for="" class="form-cart-label">Ghi chú</label>
+                    <textarea
+                      name=""
+                      id=""
+                      cols="30"
+                      rows="10"
+                      class="form-cart-textarea"
+                    ></textarea>
+                  </div>
+                  <div class="form-cart-comeback">
+                    <a href="#" class="form-cart-backlink">
+                      <img src="./image/back-icon.webp" alt="" />
+                      Tiếp tục mua hàng
+                    </a>
+                  </div>
+                </div>
+
+                <div class="form-control-right">
+                  <button class="form-cart-update">
+                    Cập nhật
+                    <i class="fa-solid fa-chevron-right form-cart-icon"></i>
+                  </button>
+                  <button class="form-cart-pay">
+                    Thanh toán
+                    <i class="fa-solid fa-chevron-right form-cart-icon"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+      <!-- End-main-content -->
+
+      <!-- Footer -->
+      <footer class="footer">
+        <!-- footer-main-content -->
+        <div class="footer-main">
+          <div class="footer-main-container">
+            <div class="footer-main-list">
+              <div class="footer-main-item shop-system">
+                <h2 class="footer-main-title">HỆ THỐNG CỬA HÀNG</h2>
+
+                <div class="shop-system-content">
+                  <div class="shop-system-info">
+                    <h2 class="shop-system-name">X- Shop Hà Nội</h2>
+                    <p class="shop-system-address">
+                      Địa chỉ: Tòa nhà FPT Polytechnic, P. Trịnh Văn Bô, Xuân
+                      Phương, Nam Từ Liêm, Hà Nội
+                    </p>
+                    <p class="shop-system-phone">
+                      SĐT Bàn: 0286.2713.907 ( 9h-21h)
+                    </p>
+                  </div>
+                  <div class="shop-system-info">
+                    <h2 class="shop-system-name">X- Shop TP HCM</h2>
+                    <p class="shop-system-address">
+                      Địa chỉ: 43A Điện Biên Phủ, P. 15, Q. Bình Thạnh, TP HCM
+                    </p>
+                    <p class="shop-system-phone">
+                      SĐT Bàn: 0282.2456.637 ( 9h-21h)
+                    </p>
+                  </div>
+                  <div class="shop-system-info">
+                    <h2 class="shop-system-name">X- Shop THỦ ĐỨC</h2>
+                    <p class="shop-system-address">
+                      Địa chỉ: 148/7 Hoàng Diệu 2, P. Linh Chiểu, TP. Thủ Đức
+                    </p>
+                    <p class="shop-system-phone">
+                      SĐT Bàn: 0286.2713.504 (9h-21h)
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="footer-main-item shop-support">
+                <h2 class="footer-main-title">HỆ THỐNG CỬA HÀNG</h2>
+                <ul class="shop-support-list">
+                  <li class="shop-support-item">Cam kết từ X - Shop</li>
+                  <li class="shop-support-item">Hướng dẫn chọn size</li>
+                  <li class="shop-support-item">Hướng dẫn mua hàng</li>
+                  <li class="shop-support-item">Hướng dẫn đặt hàng online</li>
+                  <li class="shop-support-item">Quy định đổi hàng</li>
+                  <li class="shop-support-item">Chính sách vận chuyển</li>
+                  <li class="shop-support-item">Ưu đãi quà tặng</li>
+                  <li class="shop-support-item">Chính sách bảo mật</li>
+                </ul>
+              </div>
+
+              <div class="footer-main-item facebook">
+                <h2 class="footer-main-title">HỆ THỐNG CỬA HÀNG</h2>
+              </div>
+
+              <div class="footer-main-item instagram">
+                <h2 class="footer-main-title">HỆ THỐNG CỬA HÀNG</h2>
+                <div class="instagram-gallery">
+                  <div class="instagram-item">
+                    <a href="#" class="instagram-image">
+                      <img
+                        src="./image/insta-img-01.jpg"
+                        alt=""
+                        class="instagram-img"
+                      />
+                    </a>
+                  </div>
+                  <div class="instagram-item">
+                    <a href="#" class="instagram-image">
+                      <img
+                        src="./image/insta-img-02.jpg"
+                        alt=""
+                        class="instagram-img"
+                      />
+                    </a>
+                  </div>
+                  <div class="instagram-item">
+                    <a href="#" class="instagram-image">
+                      <img
+                        src="./image/insta-img-03.jpg"
+                        alt=""
+                        class="instagram-img"
+                      />
+                    </a>
+                  </div>
+                  <div class="instagram-item">
+                    <a href="#" class="instagram-image">
+                      <img
+                        src="./image/insta-img-04.jpg"
+                        alt=""
+                        class="instagram-img"
+                      />
+                    </a>
+                  </div>
+                  <div class="instagram-item">
+                    <a href="#" class="instagram-image">
+                      <img
+                        src="./image/insta-img-05.jpg"
+                        alt=""
+                        class="instagram-img"
+                      />
+                    </a>
+                  </div>
+                  <div class="instagram-item">
+                    <a href="#" class="instagram-image">
+                      <img
+                        src="./image/insta-img-06.jpg"
+                        alt=""
+                        class="instagram-img"
+                      />
+                    </a>
+                  </div>
+                  <div class="instagram-item">
+                    <a href="#" class="instagram-image">
+                      <img
+                        src="./image/insta-img-07.jpg"
+                        alt=""
+                        class="instagram-img"
+                      />
+                    </a>
+                  </div>
+                  <div class="instagram-item">
+                    <a href="#" class="instagram-image">
+                      <img
+                        src="./image/insta-img-08.jpg"
+                        alt=""
+                        class="instagram-img"
+                      />
+                    </a>
+                  </div>
+                  <div class="instagram-item">
+                    <a href="#" class="instagram-image">
+                      <img
+                        src="./image/insta-img-09.jpg"
+                        alt=""
+                        class="instagram-img"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- footer-secondary-content -->
+        <div class="footer-secondary">
+          <div class="footer-secondary-container">
+            <div class="shop-enterprise">
+              <ul class="shop-business">
+                <li><a href="#"> Công ty TNHH X-Shop </a></li>
+                <li><a href="#"> Mã số Doanh Nghiệp : 0316234396 </a></li>
+                <li>
+                  <a href="#"
+                    >Ngày cấp : 21/04/2020, Nơi cấp : Sở kế hoạch và đầu tư
+                    TP.HCM
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Địa chỉ văn phòng: 43A Điện Biên Phủ, Phường 15, Q. Bình
+                    Thạnh
+                  </a>
+                </li>
+              </ul>
+
+              <div class="shop-license">
+                <img src="./image/lis-01.webp" alt="" />
+                <img src="./image/lis-02.png" alt="" />
+              </div>
+            </div>
+
+            <p class="shop-copyright">© Bản quyền thuộc về X-Shop</p>
+          </div>
+        </div>
+      </footer>
+      <!-- End footer -->
+    </div>
+
+    <script src="./js/slide.js"></script>
+  </body>
+</html>
